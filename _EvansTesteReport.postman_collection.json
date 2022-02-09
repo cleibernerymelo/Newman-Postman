@@ -1,0 +1,3515 @@
+{
+	"info": {
+		"_postman_id": "be136d75-03d7-4fb1-933e-48e7916e06c2",
+		"name": "_EvansTesteReport",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Billing",
+			"item": [
+				{
+					"name": "post-sendemail",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \r\n    \"subject\": \"Envio de doc com anexo\",    \r\n    \"body\": \"Teste envio de email com doc em anexo\",    \r\n    \"bodyIsHtml\": true,    \r\n    \"to\":[        \r\n        {   \"address\": \"isabel.veloso@primaverabss.com\",            \r\n            \"culture\": \"pt-PT\"        \r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/{{tenant}}/{{organization}}/billing/invoices/{{invoiceID}}/send",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"{{tenant}}",
+								"{{organization}}",
+								"billing",
+								"invoices",
+								"{{invoiceID}}",
+								"send"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-emailInfo",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/{{tenant}}/{{organization}}/billing/invoices/9da7ac34-9d89-ec11-b820-0003ff55f6b7/emailinfo",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"{{tenant}}",
+								"{{organization}}",
+								"billing",
+								"invoices",
+								"9da7ac34-9d89-ec11-b820-0003ff55f6b7",
+								"emailinfo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-invoice",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"buyerCustomerParty\": \"INDIF\",\r\n    \"company\": \"Default\",\r\n\t\t\"documentLines\": [\r\n\t{\r\n\t\t\"salesItem\": \"PORTES\",\r\n\t\t\"unitPrice\": {\r\n          \"amount\": 0.4187\r\n        }\r\n\t}\r\n\t]\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/{{tenant}}/{{organization}}/billing/invoices",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"{{tenant}}",
+								"{{organization}}",
+								"billing",
+								"invoices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-invoice-inexistent-customer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"buyerCustomerParty\": \"inexistent\",\r\n    \"company\": \"Default\",\r\n\t\t\"documentLines\": [\r\n\t{\r\n\t\t\"salesItem\": \"PORTES\",\r\n\t\t\"unitPrice\": {\r\n          \"amount\": 0.4187\r\n        }\r\n\t}\r\n\t]\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/{{tenant}}/{{organization}}/billing/invoices",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"{{tenant}}",
+								"{{organization}}",
+								"billing",
+								"invoices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-invoice-inexistent-company",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"buyerCustomerParty\": \"INDIF\",\r\n    \"company\": \"Inexistent\",\r\n\t\t\"documentLines\": [\r\n\t{\r\n\t\t\"salesItem\": \"PORTES\",\r\n\t\t\"unitPrice\": {\r\n          \"amount\": 0.4187\r\n        }\r\n\t}\r\n\t]\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/{{tenant}}/{{organization}}/billing/invoices",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"{{tenant}}",
+								"{{organization}}",
+								"billing",
+								"invoices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-invoice-sem-linhas",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"buyerCustomerParty\": \"INDIF\",\r\n    \"company\": \"Default\",\r\n\t\t\"documentLines\": [\r\n\t\r\n\t]\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/{{tenant}}/{{organization}}/billing/invoices",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"{{tenant}}",
+								"{{organization}}",
+								"billing",
+								"invoices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-invoice-set-isactive",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "0"
+						},
+						"url": {
+							"raw": "{{url}}/api/{{tenant}}/{{organization}}/billing/invoices/{companyKey}/{documentType}/{serie}/{seriesNumber}/isActive",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"{{tenant}}",
+								"{{organization}}",
+								"billing",
+								"invoices",
+								"{companyKey}",
+								"{documentType}",
+								"{serie}",
+								"{seriesNumber}",
+								"isActive"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "update-invoice-set-isactive",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "0"
+								},
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/billing/invoices/default/FA/2017/5/isActive",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"billing",
+										"invoices",
+										"default",
+										"FA",
+										"2017",
+										"5",
+										"isActive"
+									]
+								}
+							},
+							"_postman_previewlanguage": "Text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "update-invoice-set-remarks",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\"update remarks\""
+						},
+						"url": {
+							"raw": "{{url}}/api/{{tenant}}/{{organization}}/billing/invoices/{companyKey}/{documentType}/{serie}/{seriesNumber}/remarks",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"{{tenant}}",
+								"{{organization}}",
+								"billing",
+								"invoices",
+								"{companyKey}",
+								"{documentType}",
+								"{serie}",
+								"{seriesNumber}",
+								"remarks"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "update-invoice-set-remarks",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "\"update remarks\"",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/billing/invoices/default/FA/2017/5/remarks",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"billing",
+										"invoices",
+										"default",
+										"FA",
+										"2017",
+										"5",
+										"remarks"
+									]
+								}
+							},
+							"_postman_previewlanguage": "Text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Sales - Create InvoiceTypes (Add series type to Invoice Type) Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\n       {\n           \"serie\": \"2021\",\n           \"economicActivityClass\": \"12345\"\n       }\n"
+						},
+						"url": {
+							"raw": "{{url}}/api/{{tenant}}/{{organization}}/salesCore/invoiceTypes/DEFAULT/FA/documentTypeSeries",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"{{tenant}}",
+								"{{organization}}",
+								"salesCore",
+								"invoiceTypes",
+								"DEFAULT",
+								"FA",
+								"documentTypeSeries"
+							]
+						},
+						"description": "Criação de fatura com uma linha"
+					},
+					"response": []
+				},
+				{
+					"name": "print-invoice-by-id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/{{tenant}}/{{organization}}//billing/invoices/{{invoiceID}}/print",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"{{tenant}}",
+								"{{organization}}",
+								"",
+								"billing",
+								"invoices",
+								"{{invoiceID}}",
+								"print"
+							]
+						},
+						"description": "Obter a lista de faturas (billing)"
+					},
+					"response": []
+				},
+				{
+					"name": "delete-invoice-by-key",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/{{tenant}}/{{organization}}/billing/invoices/default/FA/2017/5",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"{{tenant}}",
+								"{{organization}}",
+								"billing",
+								"invoices",
+								"default",
+								"FA",
+								"2017",
+								"5"
+							]
+						},
+						"description": "Obter a lista de faturas (billing)"
+					},
+					"response": []
+				},
+				{
+					"name": "delete-invoice-inexistent-by-key",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/{{tenant}}/{{organization}}/billing/invoices/default/FA/2017/111111",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"{{tenant}}",
+								"{{organization}}",
+								"billing",
+								"invoices",
+								"default",
+								"FA",
+								"2017",
+								"111111"
+							]
+						},
+						"description": "Obter a lista de faturas (billing)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Master",
+			"item": [
+				{
+					"name": "corepatterns",
+					"item": [
+						{
+							"name": "get-companies",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"var data = JSON.parse(responseBody);\r",
+											"\r",
+											"pm.globals.set(\"companyKey\", data[1].companyKey);\r",
+											"pm.globals.set(\"companyKey2\", data[2].companyKey);  \r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/corepatterns/companies",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"corepatterns",
+										"companies"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create-company",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"var jsonData = JSON.parse(responseBody);\r",
+											"pm.globals.set(\"companyId\", jsonData);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n        \"companyKey\": \"{{$randomFirstName}}\",\n        \"name\": \"{{$randomCompanyName}}\",\n        \"companyTaxID\": \"274929236\",\n        \"country\": \"PT\",\n        \"baseCurrency\": \"EUR\"\n\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/corepatterns/companies",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"corepatterns",
+										"companies"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update-company-logo",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "",
+											"type": "file",
+											"src": "/C:/Users/isabel.veloso/OneDrive - PRIMAVERA BSS/Documents/Isabel Veloso/temp/icon_user.PNG"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/corepatterns/companies/{{companyKey}}/logo",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"corepatterns",
+										"companies",
+										"{{companyKey}}",
+										"logo"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create-company-duplicated",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n        \"companyKey\": \"{{companyKey}}\",\n        \"name\": \"{{companyKey}}\",\n        \"companyTaxID\": \"266349080\",\n        \"country\": \"PT\",\n        \"baseCurrency\": \"EUR\"\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/corepatterns/companies",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"corepatterns",
+										"companies"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get-company-by-companykey",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/corePatterns/companies/{{companyKey}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"corePatterns",
+										"companies",
+										"{{companyKey}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get-inexistent-company-by-companykey",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/corePatterns/companies/inexistent",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"corePatterns",
+										"companies",
+										"inexistent"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get-companies-paged",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/corepatterns/companies?page=1&pageSize=2",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"corepatterns",
+										"companies"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get-companies-odata",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/corepatterns/companies/odata?$filter=IsActive eq true and IsSystem eq false and IsDeleted eq false&orderby=CreatedOn",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"corepatterns",
+										"companies",
+										"odata"
+									],
+									"query": [
+										{
+											"key": "$filter",
+											"value": "IsActive eq true and IsSystem eq false and IsDeleted eq false"
+										},
+										{
+											"key": "orderby",
+											"value": "CreatedOn"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get-companies-odata (oData com erro deve devolver 400)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/corepatterns/companies/odata?$filter=IsActive eq true and IsSystem eq false and IsDeleted e false&orderby=CreatedOn",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"corepatterns",
+										"companies",
+										"odata"
+									],
+									"query": [
+										{
+											"key": "$filter",
+											"value": "IsActive eq true and IsSystem eq false and IsDeleted e false"
+										},
+										{
+											"key": "orderby",
+											"value": "CreatedOn"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get company-logo",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/corePatterns/companies/{{companyKey}}/logo",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"corePatterns",
+										"companies",
+										"{{companyKey}}",
+										"logo"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update-company-searchterm",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "\"UpdateSearchTerm\"",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/corepatterns/companies/{{companyKey}}/searchTerm",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"corepatterns",
+										"companies",
+										"{{companyKey}}",
+										"searchTerm"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "cancel-company-by-key",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 204\", function () {\r",
+											"    pm.response.to.have.status(204);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/corepatterns/companies/{{companyKey2}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"corepatterns",
+										"companies",
+										"{{companyKey2}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "cancel-inexistent-company-by-key",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/corepatterns/companies/inexistent",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"corepatterns",
+										"companies",
+										"inexistent"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get-country",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"var data = JSON.parse(responseBody);\r",
+											"pm.globals.set(\"countryKey\", data[1].countryKey);\r",
+											"console.log(\"teste\",data);\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/corepatterns/countries",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"corepatterns",
+										"countries"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create-country",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"countryKey\":\"{{$randomCountryCode}}{{$randomInt}}\",\n   \"name\": \"{{$randomCountry}}\",\n  \"culture\": \"PT\",\n  \"isExternallyManaged\":false\n}"
+								},
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/corepatterns/countries",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"corepatterns",
+										"countries"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update-country-eu",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "true",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/corePatterns/countries/{{countryKey}}/eU",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"corePatterns",
+										"countries",
+										"{{countryKey}}",
+										"eU"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get-contacts",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"var data = JSON.parse(responseBody);\r",
+											"pm.globals.set(\"contactId\", data[0].fileNumber);\r",
+											"console.log(\"teste\",data);\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/corePatterns/contacts",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"corePatterns",
+										"contacts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get-contacts-picture NOK",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/corePatterns/contacts/13072967-b711-4586-9185-bfd2d2318dd9/picture/?filename",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"corePatterns",
+										"contacts",
+										"13072967-b711-4586-9185-bfd2d2318dd9",
+										"picture",
+										""
+									],
+									"query": [
+										{
+											"key": "filename",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create-contact",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"fileNumber\": 400,\n    \"name\": \"Contacto Evans\",\n    \"contactType\": \"01\",\n    \"culture\": \"PT-PT\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/corePatterns/contacts",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"corePatterns",
+										"contacts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "print-contact",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/corePatterns/contacts/91dc8d91-1a85-ec11-b820-0003ff55f6b7/print",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"corePatterns",
+										"contacts",
+										"91dc8d91-1a85-ec11-b820-0003ff55f6b7",
+										"print"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update-contact-birthdate",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "\"2022-02-07T00:00:00\"",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/corePatterns/contacts/{{contactId}}/birthDate",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"corePatterns",
+										"contacts",
+										"{{contactId}}",
+										"birthDate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get-addresses",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"var data = JSON.parse(responseBody);\r",
+											"pm.globals.set(\"addressKey\", data[0].addressKey);\r",
+											"console.log(\"teste\",data);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/corePatterns/addresses",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"corePatterns",
+										"addresses"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create-addresses",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"addressKey\": 1,\n        \"streetName\": \"{{$randomStreetName}}\",\n        \"buildingNumber\": \"{{$randomInt}}\",\n        \"postalZone\": \"1111-001\",\n        \"cityName\": \"{{$randomCity}}\",\n        \"poBox\": null,\n        \"contactName\": \"{{$randomUserName}}\",\n        \"contactTitle\": null,\n        \"externalId\": null,\n        \"externalVersion\": null,\n    \"isExternallyManaged\": false,\n        \"index\": null,\n    \"country\": \"PT\",\n        \"region\": null,\n        \"postalZoneRef\": null\n \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/corePatterns/addresses",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"corePatterns",
+										"addresses"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update-address-contactname",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "\"novo contactName Evans\"",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/corePatterns/addresses/{{addressKey}}/contactName",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"corePatterns",
+										"addresses",
+										"{{addressKey}}",
+										"contactName"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get-assignment",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/corePatterns/assignments",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"corePatterns",
+										"assignments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create-assignment",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"title\": \"{{$randomNoun}}\",\n\t\"assignedTo\": \"86183C8A-3021-4888-B339-ADF9AE907BB5\",\n\t\"assignedToKey\": \"86183C8A-3021-4888-B339-ADF9AE907BB5\",\n\t\"dueDate\": \"21/07/2022\",\n\t\"first\": \"first\",\n\t\"notes\": \"Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum \"\t\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/corePatterns/assignments",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"corePatterns",
+										"assignments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create-assignment-min",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"title\": \"Novo assignment Evans MIN\",\n\t\"assignedTo\": \"86183C8A-3021-4888-B339-ADF9AE907BB5\",\n\t\"assignedToKey\": \"86183C8A-3021-4888-B339-ADF9AE907BB5\",\n    \"assignmentState\": 1\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/corePatterns/assignments",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"corePatterns",
+										"assignments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update-assignment-notes",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "\"TESTE\" ",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/corePatterns/assignments/1/notes",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"corePatterns",
+										"assignments",
+										"1",
+										"notes"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Detail",
+			"item": []
+		},
+		{
+			"name": "Extensions",
+			"item": [
+				{
+					"name": "Customer",
+					"item": [
+						{
+							"name": "CustomerParties",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"var jsonData = JSON.parse(responseBody);\r",
+											"pm.globals.set(\"customerId\", jsonData);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{   \r\n    \"partyKey\": \"{{$randomFirstName}}\",\r\n    \"name\": \"{{$randomLastName}}\",\r\n    \"isExternallyManaged\": false,\r\n    \"currency\": \"EUR\",\r\n    \"isPerson\": true,\r\n    \"country\": \"PT\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/salescore/customerParties",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"salescore",
+										"customerParties"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CustomerParties",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"var data = JSON.parse(responseBody);\r",
+											"pm.globals.set(\"idToDelete\", data[2].id);\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/salescore/customerParties/extension",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"salescore",
+										"customerParties",
+										"extension"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "BusinessCore Parties",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"var data = JSON.parse(responseBody);\r",
+											"pm.globals.set(\"partyKey\", data[69].partyKey);\r",
+											"console.log(\"BusinessItem\", data);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/businessCore/parties",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"businessCore",
+										"parties"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CustomerParties (with Party)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/salescore/customerParties",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"salescore",
+										"customerParties"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CustomerParty by identifier",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/salescore/customerParties/{{customerId}}/extension",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"salescore",
+										"customerParties",
+										"{{customerId}}",
+										"extension"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CustomerParty by key",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/salescore/customerParties/{{partyKey}}/extension",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"salescore",
+										"customerParties",
+										"{{partyKey}}",
+										"extension"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CustomerParty by key no exist",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"pm.test(\"Body matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"O 'Cliente' não foi encontrado.\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/salescore/customerParties/NoExist/extension",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"salescore",
+										"customerParties",
+										"NoExist",
+										"extension"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Set IsActive CustomerParty",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "0",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/salescore/customerParties/{{partyKey}}/isActive",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"salescore",
+										"customerParties",
+										"{{partyKey}}",
+										"isActive"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CustomerParty by identifier",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 204\", function () {\r",
+											"    pm.response.to.have.status(204);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/salesCore/customerParties/{{idToDelete}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"salesCore",
+										"customerParties",
+										"{{idToDelete}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CustomerParty by identifier no exist",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"pm.test(\"Body matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"O 'Cliente' não foi encontrado.\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/salesCore/customerParties/NoExist",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"salesCore",
+										"customerParties",
+										"NoExist"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Items",
+					"item": [
+						{
+							"name": "SalesItems",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"var jsonData = JSON.parse(responseBody);\r",
+											"pm.globals.set(\"itemId\", jsonData);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"itemKey\":\"{{$randomInt}}\",\r\n\t\"description\":\"{{$randomProductName}}\",\r\n    \"complementaryDescription\": \"{{$randomCatchPhraseDescriptor}}\",\r\n\t\"barcode\":\"5601234901248\",\r\n\t\"brandModel\":null,\r\n\t\"itemType\":\"01\",\r\n\t\"isActive\":1,\r\n\t\"baseUnit\":\"UN\",\r\n\t\"unit\":\"UN\",\r\n\t\"itemTaxSchema\":\"IVA-TN\",\r\n    \"remarks\": \"{{$randomLoremParagraphs}}\",\r\n\t\"priceListLines\":\r\n\t[\r\n\t\t{\"priceList\":\"PVP1\",\r\n\t\t\"priceAmount\":\r\n\t\t\t{\r\n\t\t\t\t\"amount\":{{$randomPrice}}\r\n\t\t\t},\r\n\t\t\t\"unit\":\"UN\"\r\n\t\t},\r\n\t\t{\"priceList\":\"PVP2\",\r\n\t\t\"priceAmount\":\r\n\t\t\t{\r\n\t\t\t\t\"amount\":{{$randomPrice}}\r\n\t\t\t\t\r\n\t\t\t},\r\n\t\t\t\"unit\":\"UN\"\r\n\t\t},\r\n\t\t{\"priceList\":\"PVP3\",\r\n\t\t\"priceAmount\":\r\n\t\t\t{\r\n\t\t\t\t\"amount\":{{$randomPrice}}\r\n\t\t\t},\r\n\t\t\"unit\":\"UN\"\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"priceList\":\"PVP4\",\r\n\t\t\t\"priceAmount\":\r\n\t\t\t{\r\n\t\t\t\t\"amount\":{{$randomPrice}}\r\n\t\t\t},\r\n\t\t\t\"unit\":\"UN\"\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"priceList\":\"PVP5\",\r\n\t\t\t\"priceAmount\":\r\n\t\t\t{\r\n\t\t\t\t\"amount\":{{$randomPrice}}\r\n\t\t\t},\r\n\t\t\t\"unit\":\"UN\"\r\n\t\t}\r\n\t]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/salescore/salesitems",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"salescore",
+										"salesitems"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SalesItems",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/salesCore/salesItems/extension",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"salesCore",
+										"salesItems",
+										"extension"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "BusinessCore Items",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"var data = JSON.parse(responseBody);\r",
+											"pm.globals.set(\"itemKey\", data[1].itemKey);\r",
+											"//console.log(\"BusinessItem\", data);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/businessCore/items",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"businessCore",
+										"items"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SalesItems (with Item)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/salesCore/salesItems",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"salesCore",
+										"salesItems"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SalesItem by identifier",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/salesCore/salesItems/{{itemId}}/extension",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"salesCore",
+										"salesItems",
+										"{{itemId}}",
+										"extension"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SalesItem by key",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/salesCore/salesItems/{{itemKey}}/extension",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"salesCore",
+										"salesItems",
+										"{{itemKey}}",
+										"extension"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SalesItem by key no exist",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"pm.test(\"Body matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"O 'Artigo de Vendas' não foi encontrado.\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/salesCore/salesItems/noExist/extension",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"salesCore",
+										"salesItems",
+										"noExist",
+										"extension"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Set IsActive SalesItem",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "1",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/salesCore/salesItems/{{itemKey}}/isActive",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"salesCore",
+										"salesItems",
+										"{{itemKey}}",
+										"isActive"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SalesItem by identifier",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 204\", function () {\r",
+											"    pm.response.to.have.status(204);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/salescore/salesitems/{{itemId}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"salescore",
+										"salesitems",
+										"{{itemId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SalesItem by identifier no exist",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"pm.test(\"Body matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"O 'Artigo de Vendas' não foi encontrado.\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/{{tenant}}/{{organization}}/salescore/salesitems/NoExist",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"{{tenant}}",
+										"{{organization}}",
+										"salescore",
+										"salesitems",
+										"NoExist"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Many To Many",
+			"item": [
+				{
+					"name": "get-users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/{{tenant}}/{{organization}}/identity/users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"{{tenant}}",
+								"{{organization}}",
+								"identity",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-user",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:60660/api/800001/800001-0579/identity/users/201FCECA-5944-4F2A-96ED-FC53C2A3E6E4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "60660",
+							"path": [
+								"api",
+								"800001",
+								"800001-0579",
+								"identity",
+								"users",
+								"201FCECA-5944-4F2A-96ED-FC53C2A3E6E4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-roles",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/{{tenant}}/{{organization}}/identity/users/86183c8a-3021-4888-b339-adf9ae907bb5/roles",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"{{tenant}}",
+								"{{organization}}",
+								"identity",
+								"users",
+								"86183c8a-3021-4888-b339-adf9ae907bb5",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Roles Odata NOK",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:60660/api/800001/800001-0579/identity/roles/odata?$select=Users/Name,RoleKey&$expand=Users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "60660",
+							"path": [
+								"api",
+								"800001",
+								"800001-0579",
+								"identity",
+								"roles",
+								"odata"
+							],
+							"query": [
+								{
+									"key": "$select",
+									"value": "Users/Name,RoleKey"
+								},
+								{
+									"key": "$expand",
+									"value": "Users"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add relationship by ID (Role to User)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjM2M0REMDZBRUQ4NzI1MzVBODFEQzIwMTY0NUREQTQ4RDBCMThDMjlSUzI1NiIsIng1dCI6Ik5qM1FhdTJISlRXb0hjSUJaRjNhU05DeGpDayIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3N0Zy1pZGVudGl0eS5wcmltYXZlcmFic3MuY29tIiwibmJmIjoxNjQxNDgxMTA4LCJpYXQiOjE2NDE0ODExMDgsImV4cCI6MTY0MTQ5NTUwOCwiYXVkIjpbImphc21pbiIsImxpdGhpdW0tcHVzaG5vdGlmaWNhdGlvbnMiLCJodHRwczovL3N0Zy1pZGVudGl0eS5wcmltYXZlcmFic3MuY29tL3Jlc291cmNlcyJdLCJzY29wZSI6WyJhcHBsaWNhdGlvbiIsIm12YyIsIm9wZW5pZCIsInByb2ZpbGUiLCJlbWFpbCIsInN1YnNjcmlwdGlvbiIsImxpdGhpdW0tcHVzaG5vdGlmaWNhdGlvbnMtaHViIl0sImFtciI6WyJwd2QiXSwiY2xpZW50X2lkIjoiZWxldmF0aW9uZnJ3LWltcGxpY3QiLCJjbGllbnQtdGVzdF9jbGFpbSI6IjEyMyIsInN1YiI6Ijg2MTgzYzhhLTMwMjEtNDg4OC1iMzM5LWFkZjlhZTkwN2JiNSIsImF1dGhfdGltZSI6MTY0MTQ2MzU2MywiaWRwIjoibG9jYWwiLCJuYW1lIjoiaXNhYmVsLnZlbG9zb0BwcmltYXZlcmFic3MuY29tIiwiZW1haWwiOiJpc2FiZWwudmVsb3NvQHByaW1hdmVyYWJzcy5jb20iLCJkaXNwbGF5X25hbWUiOiJJc2FiZWwgVmVsb3NvIiwiY3VsdHVyZSI6InB0LVBUIiwicGljdHVyZSI6Imh0dHBzOi8vc3Qtc3MubGl0aGl1bS5wcmltYXZlcmFic3MuY29tL2FwaS92MS4wL3VzZXJwaWN0dXJlLzg2MTgzYzhhLTMwMjEtNDg4OC1iMzM5LWFkZjlhZTkwN2JiNS9wdWJsaWMiLCJzZWN1cml0eV9zdGFtcCI6IklOQVpaTkpNRjVYRDdWQ0w3QzNGWU1CQUNCRUlTU0ZQIiwic2lkIjoiODUxOUExMDUzMDEzOEExOTM4NjM1MTU1OTZCNTIzNDQifQ.QkdOlmAT905hzL28PZ76yIMuwJLBT-MFmVmc4i9ovTYUh9VyT7nyq9AyFx37Up9fzABeVr_38284qUXaB8S9Y0E7Jb4gntdmgOTzWBip6jQSIDU1cCQ-WILLA_Ki6XASgiCKv2WecqDs_thr2DHNuNt9ALxi3dZLCYOPei2xfRTEx215jYZGr-6ZFgiwzx8fmMu-pnVGubrQPCVZ4ze9QKVrGWslibGeKo_1cUR8DlCcYKSNDZynAQ0WgBis1PV5PJPx_Ex7cHIRXK_MJWbAEhsf2Yezx1kBZ78K64s6pBn4bahAxgZ2M_wD8oJdI1Q7Da4FNM0zm-JG4x2lNDlxwA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n\t\"1b65d4ed-2db3-462c-8d21-e06edf1a6fbf\"\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:60660/api/800001/800001-0579/identity/users/86183C8A-3021-4888-B339-ADF9AE907BB5/roles/addById",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "60660",
+							"path": [
+								"api",
+								"800001",
+								"800001-0579",
+								"identity",
+								"users",
+								"86183C8A-3021-4888-B339-ADF9AE907BB5",
+								"roles",
+								"addById"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove relationship (Role from User)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n\t\"TESTER\"\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:60660/api/800001/800001-0579/identity/users/86183C8A-3021-4888-B339-ADF9AE907BB5/roles/remove",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "60660",
+							"path": [
+								"api",
+								"800001",
+								"800001-0579",
+								"identity",
+								"users",
+								"86183C8A-3021-4888-B339-ADF9AE907BB5",
+								"roles",
+								"remove"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove relationship by ID (USer from role)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n\t\"86183C8A-3021-4888-B339-ADF9AE907BB5\"\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:60660/api/800001/800001-0579/identity/roles/TESTER/users/removeById",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "60660",
+							"path": [
+								"api",
+								"800001",
+								"800001-0579",
+								"identity",
+								"roles",
+								"TESTER",
+								"users",
+								"removeById"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add relationship by KEY (Role to User)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n\t\"TESTER\"\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:60660/api/800001/800001-0579/identity/users/86183C8A-3021-4888-B339-ADF9AE907BB5/roles/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "60660",
+							"path": [
+								"api",
+								"800001",
+								"800001-0579",
+								"identity",
+								"users",
+								"86183C8A-3021-4888-B339-ADF9AE907BB5",
+								"roles",
+								"add"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
